@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="StudentForm" [formGroup]="form">
+        <table>
+            <tr>
+                <th><label for="username">Username: </label></th>
+                <td><input type="email" name="username" id="email" formControlName="user"></td>
+                <span *ngIf="form.get('user')?.touched">
+                    <span *ngIf="form.get('user')?.hasError('required')" style="color:red">*username is required.</span>
+                </span>
+            </tr>
+            <tr>
+                <th><label for="password">Password: </label></th>
+                <td><input type="password" name="password" id="password" formControlName="password"></td>
+                <span *ngIf="form.get('password')?.touched">
+                    <span *ngIf="form.get('password')?.hasError('required')" style="color:red">*password is required.</span>
+                </span>
+            </tr>
+            <tr>
+                <th><label for="dob">Date of Birth: </label></th>
+                <td><input type="date" name="dob" id="dob" formControlName="dob"></td><span
+                    *ngIf="form.get('dob')?.touched"><span *ngIf="form.get('dob')?.hasError('required')" style="color:red">*dob is required.</span>
+                </span>
+            </tr>
+            <tr>
+                <th><label for="phone">Phone: </label></th>
+                <td><input type="number" name="phone" id="phone" formControlName="phone"></td><span
+                    *ngIf="form.get('phone')?.touched"><span *ngIf="form.get('phone')?.hasError('required')" style="color:red">*phone is
+                        required.</span></span>
+            </tr>
+            <tr>
+                <th><label for="address">Address: </label></th>
+                <td><input type="text" name="address" id="address" formControlName="address"></td><span
+                    *ngIf="form.get('address')?.touched"><span *ngIf="form.get('address')?.hasError('required')"
+                        style="color:red">*address is required.</span></span>
+            </tr><br>
+            <button type="submit" style="margin-left: 20%;"
+                [disabled]="form.get('user')?.hasError('required') || form.get('password')?.hasError('required') || form.get('dob')?.hasError('required') || form.get('phone')?.hasError('required') || form.get('address')?.hasError('required')" 
+                 (click)="submit()">Submit</button>
+        </table>
+    </form>
+    <br>
+    <table>
+        <thead>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Date of Birth</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </thead>
+        <tr *ngFor="let student of studentList">
+            <td>{{student.user}}</td>
+            <td>{{student.password}}</td>
+            <td>{{student.dob}}</td>
+            <td>{{student.phone}}</td>
+            <td>{{student.address}}</td>
+        </tr>
+    </table>
+    {{form.value.user.invalid}}
+</body>
+
+</html>
